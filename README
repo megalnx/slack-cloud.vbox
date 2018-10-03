@@ -1,0 +1,39 @@
+###################################
+  Slackware VBox cloud initiation
+###################################
+
+This script is intended to be used for creating a Slackware 
+cloud over VirtualBox machines. It's design for work with cygwin
+although with a few changes could also be used at Linux bash.
+
+
+
+Folders:
+mccmds: Custom commands for machine configuration
+cfgs: Custom configuration files
+logs: Building logs
+
+Files: 
+vbox-slackinstall.txt - Slackware default configuration
+slackware141-AMZ-unattended.cfg  - Slackware 14.1 unattended installation commands
+slackware142-AMZ-unattended.cfg  - Slackware 14.2 unattended installation commands
+
+----------------------------------
+
+create-cloud-vbox.sh
+
+The script accept the following configurations
+
+The cloud name:
+CLOUDNAME=MyCloud
+
+The Slackware (version) unattended installation script
+SLACKWARECFG=./cfgs/slackware141-AMZ-unattended.cfg
+
+The name of the virtual base disk and storage location
+VMDISK="slackware-14.1_base.vdi"
+STOREAT="C:/Users/$(whoami)/Documents"
+
+The following list are example of additional packages to be installed
+BASEPKGS="mpfr slackpkg gnupg ncurses diffutils openssh"
+CLOUDPKGS="net-tools network-scripts"

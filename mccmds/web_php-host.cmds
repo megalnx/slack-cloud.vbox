@@ -1,0 +1,3 @@
+chmod 744 /mnt/etc/rc.d/rc.httpd;
+
+sed -i '/^#.*mod_php.conf/s/^#//g' /etc/httpd/httpd.conf

@@ -1,0 +1,8 @@
+chmod 744 /mnt/etc/rc.d/rc.bind;
+mkdir /var/named/domains
+
+
+chmod 744 /mnt/etc/rc.d/rc.ntpd;
+chmod 744 /mnt/etc/rc.d/rc.httpd;
+
+sed -i '/^#.*mod_php.conf/s/^#//g' /etc/httpd/httpd.conf

@@ -1,0 +1,8 @@
+mount /dev/sda1 /mnt
+
+slackinstall --promptmode terse \
+  --srcpath /var/log/mount/slackware \
+  --mountpoint /var/log/mount \
+  --target /mnt \
+  --device /dev/sr0 \
+  --series "a#"

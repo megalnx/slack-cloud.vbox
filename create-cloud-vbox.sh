@@ -27,11 +27,12 @@ $HLINE; echo "Creating cloud: $CLOUDNAME"; $HLINE
 function vmbase() {
   # Create a base VM disk installation
   $HLINE; echo " -> Building $VMBASENAME"; $HLINE
-  VMDISK=$VMDISK VMNAME="$VMBASENAME" create-slack-vbox.sh $SLACKWARECFG install ; sleep 4
+  VMDISK=$VMDISK VMNAME="$VMBASENAME" sh create-slack-vbox.sh $SLACKWARECFG; sleep 4
+  VMDISK=$VMDISK VMNAME="$VMBASENAME" sh create-slack-vbox.sh $SLACKWARECFG install ; sleep 4
 
   export PKGS="$BASEPKGS $CLOUDPKGS dhcpcd";
-  VMNAME=$VMBASENAME create-slack-vbox.sh $SLACKWARECFG configure
   VBoxManage.exe modifyvm $VMBASENAME --audio none
+  VMNAME=$VMBASENAME create-slack-vbox.sh $SLACKWARECFG configure  
   md5sum $VMDISK > $VMDISK.md5
   sha1sum $VMDISK > $VMDISK.sha1
 }
@@ -73,7 +74,7 @@ function snapshoted(){
 }
 
 function machinecfg(){
-  $HLINE; echo " Configuring: $VMNAME - $VMHOSTNAME"; $HLINE
+  $HLINE; echo " Configuring: $VMNAME - $VMHOSTNAME"; $HLINE  
   VMNAME=$1 \
   create-slack-vbox.sh $SLACKWARECFG configure
   sleep 4
@@ -124,7 +125,7 @@ function nameservercfg(){
 }
 
 
-vmbase		# create base vm disk installation
+vmbase		# create base VM disk installation
 
 if [[ "$1" == "clonedisk" ]]; then
   echo "Cloning mediums"
@@ -136,6 +137,6 @@ fi
 
 sleep 2
 
-webservercfg web.amz-host.vbox mccmds/web.amz-host.cmds
-dbservercfg db.amz-host.vbox mccmds/db.amz-host.cmds
-nameservercfg tadominado.vbox mccmds/ns.tadominado.cmds
+webservercfg web.amz-host.vbox ~/slack-cloud/mccmds/web-host.cmds
+dbservercfg db.amz-host.vbox mccmds/db-host.cmds
+nameservercfg tadominado.vbox ~/slack-cloud/mccmds/ns-host.cmds
